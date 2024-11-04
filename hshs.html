@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exca - Navbar Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Latar belakang gelap */
+            color: #f1f1f1; /* Warna teks terang */
+        }
+        nav {
+            background-color: #1e1e1e;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #52d3d8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+        nav h1:hover {
+            color: #3887be;
+        }
+        .nav-links {
+            display: inline-block;
+            margin-left: 20px;
+        }
+        .nav-links a {
+            color: #f1f1f1;
+            font-size: 1.1em;
+            padding: 10px 15px;
+            margin: 0 8px;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s, transform 0.3s;
+        }
+        .nav-links a:hover {
+            background-color: #3887be;
+            color: #121212;
+            transform: scale(1.1);
+        }
+        .content {
+            padding: 20px;
+            display: none; /* Semua konten tersembunyi secara default */
+            max-width: 800px;
+            margin: 20px auto;
+            background: #2a2a2a; /* Latar belakang konten gelap */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            opacity: 0; /* Transparansi awal */
+            transform: scale(0.9); /* Ukuran awal untuk animasi */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Animasi transisi */
+        }
+        .active {
+            display: block; /* Menampilkan konten yang aktif */
+            opacity: 1; /* Transparansi penuh */
+            transform: scale(1); /* Ukuran normal */
+        }
+        .fade-out {
+            opacity: 0; /* Efek redup saat keluar */
+            transition: opacity 0.5s ease;
+        }
+        h2 {
+            color: #52d3d8; /* Warna judul konten */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #3887be;
+        }
+        input, textarea {
+            padding: 10px;
+            border: 1px solid #3887be;
+            border-radius: 5px;
+            background: #1e1e1e; /* Latar belakang input gelap */
+            color: #f1f1f1; /* Teks input terang */
+        }
+        input[type="submit"] {
+            background-color: #3887be;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+            margin-top: 15px;
+            padding: 10px;
+            font-weight: bold;
+        }
+        input[type="submit"]:hover {
+            background-color: #52d3d8;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>Exca</h1>
+        <div class="nav-links">
+            <a href="#" onclick="showContent('home')">Home</a>
+            <a href="#" onclick="showContent('about')">About</a>
+            <a href="#" onclick="showContent('contact')">Contact</a>
+        </div>
+    </nav>
+
+    <div id="home" class="content active">
+        <h2>Selamat Datang di Halaman Home</h2>
+        <p>Ini adalah halaman utama di mana Anda bisa menemukan berbagai informasi mengenai Exca. Kami berkomitmen untuk memberikan layanan terbaik dalam bidang matematika dan kalkulasi.</p>
+        <p>Jelajahi berbagai fitur yang kami tawarkan, dan jangan ragu untuk menghubungi kami jika ada pertanyaan.</p>
+        <p>Kami menyediakan kalkulator untuk menghitung volume, luas, dan berbagai aplikasi matematika lainnya yang dapat membantu Anda dalam belajar.</p>
+    </div>
+
+    <div id="about" class="content">
+        <h2>Tentang Kami</h2>
+        <p>Exca adalah platform yang didedikasikan untuk membantu Anda dalam memahami konsep-konsep matematika yang rumit dengan cara yang sederhana. Kami percaya bahwa matematika dapat diakses oleh semua orang.</p>
+        <p>Tim kami terdiri dari para ahli di bidang matematika dan pendidikan, yang siap membantu Anda belajar dengan cara yang menyenangkan dan interaktif.</p>
+        <p>Kami menyediakan berbagai alat pembelajaran dan sumber daya untuk membantu Anda memahami matematika dengan lebih baik.</p>
+    </div>
+
+    <div id="contact" class="content">
+        <h2>Hubungi Kami</h2>
+        <p>Jika Anda memiliki pertanyaan, saran, atau umpan balik, jangan ragu untuk menghubungi kami melalui formulir di bawah ini:</p>
+        <form>
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Pesan:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <input type="submit" value="Kirim">
+        </form>
+    </div>
+
+    <script>
+        function showContent(section) {
+            // Sembunyikan semua konten dengan efek fade-out
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.add('fade-out');
+                setTimeout(() => {
+                    content.classList.remove('active');
+                }, 500); // Durasi fade-out
+            });
+
+            // Tampilkan konten yang dipilih setelah delay
+            setTimeout(() => {
+                const activeContent = document.getElementById(section);
+                activeContent.classList.remove('fade-out');
+                activeContent.classList.add('active');
+            }, 500); // Delay menunggu fade-out selesai
+        }
+    </script>
+</body>
+</html>
